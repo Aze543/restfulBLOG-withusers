@@ -1,0 +1,54 @@
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('../static/img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Aze's Blog</h1>
+            <span class="subheading">A collection of random blogs.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in all_posts %}
+        <div class="post-preview">
+          <a href="{{ url_for('show_post', index=post[0]) }}">
+            <h2 class="post-title">
+              {{post[1]}}
+            </h2>
+            <h3 class="post-subtitle">
+              {{post[6]}}
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">{{post[4]}}</a>
+            on {{post[2]}}</p>
+            {% if admin: %}
+            <a href="{{ url_for('delete_post', post_id=post[0]) }}">✘</a>
+            {% endif %}
+        </div>
+
+        {% endfor %}
+
+        <!-- New Post -->
+        {% if admin: %}
+        <hr>
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="{{ url_for('add_post') }}">Create New Post</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <hr>
+
+{% include "footer.html" %}

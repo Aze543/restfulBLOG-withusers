@@ -1,0 +1,13 @@
+{{url_for('edit_post', post_id=post[0])}}
+.skill-row{
+    text-align: center;
+    width: 50%;
+    margin: 50px auto 100px auto;
+    text-align: left;
+    line-height: 2;
+}
+.python_img {
+    float: left;
+    margin-right: 30px;
+    width: 25%
+}

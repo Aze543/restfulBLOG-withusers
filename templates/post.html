@@ -1,0 +1,53 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{post[5]}}')">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-10 mx-auto">
+				<div class="post-heading">
+					<h1>{{post[1]}}</h1>
+					<h2 class="subheading">{{post[6]}}</h2>
+					<span class="meta">Posted by
+              <a href="#">{{post[4]}}</a>
+              on {{post[2]}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p>
+            {{post[3]|safe}}
+          </p>
+           <div class="clearfix">
+               {% if admin: %}
+                <a class="btn btn-primary float-right" href="{{ url_for('edit_post', post_id=post[0]) }}">Edit Post</a>
+               <br><br><br><hr>
+               {% endif %}
+               {{ wtf.quick_form(form, novalidate=True) }}
+               {{ ckeditor.load() }}
+               {{ ckeditor.config(name='body') }}
+               <hr>
+               <h2>Comments: {{ num }}</h2>
+               {% for item in comments: %}
+               <div  class=".div-row" style=''>
+               <img class="com-img"  style='vertical-align:middle; margin-right: 5%;' src='{{ item[4] }}'>
+                 <p style="width: 50%"><strong>{{ item[2]|safe }}</strong></p><p>-{{ item[3] }}</p>
+               </div>
+               {% endfor %}
+        </div>
+          </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+{% include "footer.html" %}
